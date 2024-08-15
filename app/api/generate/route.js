@@ -12,7 +12,15 @@ const systemPrompt = `
 
 4. **Important Details or Notes**: Add any critical details, formulas, or notes that are essential for understanding the concept.
 
-5. **Mnemonic or Memory Aid**: If applicable, include a mnemonic or memory aid to help remember the information."
+5. **Mnemonic or Memory Aid**: If applicable, include a mnemonic or memory aid to help remember the information.
+
+6. **Tailor difficulty to user preferences.
+
+7. **If given a body of text, extract the most important and relevant information from the flashcards.
+
+8. **Aim to create a balanced set of flashcards that overs the topic comprehensively **
+
+9. **Only generate 10 flashcards 
 
 Return in the following JSON format
 {
@@ -27,7 +35,7 @@ export async function POST(req) {
   const openai = new OpenAI();
   const data = await req.text();
 
-  const completion = await openai.chat.completion.create({
+  const completion = await openai.chat.completions.create({
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: data },
@@ -36,7 +44,11 @@ export async function POST(req) {
     response_format: { type: "json_object" },
   });
 
-  const flashcards = JSON.parse(completion.choices[0].content);
+  // console.log(completion.choices[0].message.content);
 
-  return NextResponse.json(flashcards.flashcard);
+  const flashcards = JSON.parse(completion.choices[0].message.content);
+  console.log("CHECK: ", flashcards);
+  console.log(typeof flashcards);
+
+  return NextResponse.json(flashcards.flashcards);
 }
