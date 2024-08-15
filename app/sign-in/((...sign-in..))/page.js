@@ -1,16 +1,12 @@
-import { SignIn } from "@clerk/nextjs";
-
-const {
-  Container,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Link,
-  Box,
-} = require("@mui/material");
+'use client'
+import { SignIn, useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Container, AppBar, Toolbar, Typography, Button, Link, Box } from "@mui/material";
 
 export default function SignupPage() {
+
+
   return (
     <Container maxWidth="100vw">
       <AppBar position="static" sx={{ backgroundColor: "#3f51b5" }}>
@@ -31,6 +27,7 @@ export default function SignupPage() {
         flexDirection={"column"}
         alignItems={"center"}
         justifyContent={"center"}
+        sx={{ height: '100vh' }} // Ensure full viewport height for centering
       >
         <Typography variant="h4">Sign In</Typography>
         <SignIn />
