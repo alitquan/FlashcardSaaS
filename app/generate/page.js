@@ -5,6 +5,7 @@ import { collection, doc, getDoc, writeBatch } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText, Card, CardActionArea, CardContent, Grid, Box, Button, TextField, Typography, Paper, Container } from "@mui/material";
+import {useUser} from '@clerk/nextjs'
 
 export default function Generate() {
   const [isLoaded, setLoaded] = useState(false);
@@ -14,7 +15,7 @@ export default function Generate() {
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
+  const {isSignedIn, user} = useUser();
 
 
 const handleSubmit = async () => {
@@ -62,7 +63,15 @@ const handleSubmit = async () => {
 
     try {
       const batch = writeBatch(db);
-      const userDocRef = doc(collection(db, "user"), "userId"); // Replace "userId" with actual user ID
+	  var userDocRef; 
+	  
+	  if (! user) { 
+      	userDocRef = doc(collection(db, "users"), "userId"); // Replace "userId" with actual user ID
+	  }
+	  else { 
+		userDocRef = doc(collection(db,"users"), user.id);
+	  }
+
       const docSnap = await getDoc(userDocRef);
 
       if (docSnap.exists()) {
