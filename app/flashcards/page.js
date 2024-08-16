@@ -14,43 +14,42 @@ export default function Flashcards() {
 
 	const {isLoaded, isSignedIn, user} = useUser();
 	const [flashcards, setFlashcards] = useState([]);
-	const [collectionList, setCollections] = useState([]);
-  	const [flipped, setFlipped] = useState({});
+	const [collectionList, setCollectionsList] = useState([]);
+	const [collectionChosen, setCollectionChosen] = useState(false);	
+	const [flipped, setFlipped] = useState({});
+	const [row, setRow] = useState(false); 
+
+	// State to manage the selected layout
+	const [layout, setLayout] = useState('vertical');
+	
+
+
+	// Effect to monitor changes to flashcards state
+	useEffect(() => {
+		console.log("Updated flashcards: ", flashcards);
+	}, [flashcards]);
+
 
 	const handleCollectionClick = async (collectionName) => {
 
-	  // // Reference to the user's document
-      // const userDocRef = doc(db, 'users', user.id);
-      
-      // // Reference to the subcollection within the user's document
-      // const subcollectionRef = collection(userDocRef, collectionName);
+		// Reference to the user's document
+		const userDocRef = doc(db, 'users', user.id);
+		  
+		// Reference to the subcollection (flashcards) within the specific collection
+		const flashcardsRef = collection(userDocRef, collectionName);
 
-	  // console.log(subcollectionRef);
+		// Fetch documents from the flashcards subcollection
+		const querySnapshot = await getDocs(flashcardsRef);
 
-// Reference to the user's document
-      const userDocRef = doc(db, 'users', user.id);
-      
-      // Reference to the subcollection (flashcards) within the specific collection
-      const flashcardsRef = collection(userDocRef, collectionName);
+		let fetchedFlashcards = [];
+			querySnapshot.forEach(doc => {
+			fetchedFlashcards.push(doc.data()); 
+		});
+		console.log("fetchedFlashcards: ", fetchedFlashcards);
+		setFlashcards(fetchedFlashcards);
+		setCollectionChosen(true);
+		console.log("Flashcards: ", flashcards);
 
-      // Fetch documents from the flashcards subcollection
-      const querySnapshot = await getDocs(flashcardsRef);
-      
-      let fetchedFlashcards = [];
-      querySnapshot.forEach(doc => {
-        fetchedFlashcards.push(doc.data()); // Assuming each document contains flashcard data
-      });
-
-	  console.log (fetchedFlashcards);
-
-      // Fetch documents from the subcollection
-      // const querySnapshot = await getDoc(subcollectionRef);
-		
-	  // console.log("Query snapshot: ", querySnapshot);
-
-		// querySnapshot.forEach(doc => {
-		//   flashcards.push(doc.data()); // Assuming each document contains flashcard data
-		// });
 	}; 
 
 	const handleCardClick = (id) => {
@@ -83,7 +82,7 @@ export default function Flashcards() {
 				for (const collection of collections.flashcards) {
 					list.push(collection);
 				}
-				setCollections(list)
+				setCollectionsList(list)
 				console.log("Printing collection list: ");
 				console.log({collectionList});
 			}
@@ -105,6 +104,8 @@ export default function Flashcards() {
 
 
 	return(
+
+
 		<Container maxWidth="100vw"
 			sx={{ 
 				display: "flex", 
@@ -113,44 +114,81 @@ export default function Flashcards() {
 				alignItems: "center",
 				marginTop: "2vw", 
 			}}>
-			<Flashcardbar/> 
-			<Typography
-				variant="h1">
-				Select a collection: 	
-			</Typography>
+		<Flashcardbar/> 
+
+
+		{ collectionChosen ? 
+
+
+		 // Collection has been chosen 
+		(
+			<> 
+				<Typography
+					variant="h2">
+					Cards: 
+				</Typography>
+
+				{flashcards.map((collection, index) => {
+
+					{layout === 'vertical' && (
+						console.log("vertical")
+					)}
+
+
+					{layout === 'horizontal' && (
+						console.log("horizontal")
+					)}
+
+
+					{layout === 'grid' && (
+						console.log("grid")
+					)}
+
+				})};
+			</> 
+		) : 
+
+
+		 // Collection has yet to be chosen 
+		(
 
 			<>
+				<Typography
+					variant="h1">
+					Select a collection: 	
+				</Typography>
 				{collectionList.length > 0 ? (
 					<>
 						{collectionList.map((collection, index) => (
-					<Box
-						key={index}
-						sx={{
-							width: '30%',
-							'&:hover': {
-								backgroundColor: 'lightblue', // Change this to your desired hover color
-							},
-							padding: 2,
-							display: 'flex',
-							justifyContent: 'center',
-							cursor: 'pointer'
-						}}
-						onClick={() => handleCollectionClick(collection.name)}
-					>
-						<Typography variant="h2">
-								{collection.name} 
-						</Typography>
-					</Box>
+							<Box
+								key={index}
+								sx={{
+									width: '30%',
+									'&:hover': {
+										backgroundColor: 'lightblue', 
+									},
+									padding: 2,
+									display: 'flex',
+									justifyContent: 'center',
+									cursor: 'pointer'
+								}}
+								onClick={() => handleCollectionClick(collection.name)}
+							>
+								<Typography variant="h2">
+										{collection.name} 
+								</Typography>
+							</Box>
 						))}
 					</>
 				) : (
-					<Typography variant="h6">
-						No collections available
-					</Typography>
+						<Typography variant="h6">
+							No collections available
+						</Typography>
 				)}
 			</>
 		
-		</Container> 
+		)}
+		</Container>
 	);
 
 } 
