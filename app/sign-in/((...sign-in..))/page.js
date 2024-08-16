@@ -13,13 +13,17 @@ const {
 export default function SignupPage() {
   return (
     <Container maxWidth="100vw">
-      <AppBar position="static" sx={{ backgroundColor: "#3f51b5" }}>
+      <AppBar sx={{ backgroundColor: "white", color: "black" }}>
         <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Flashcard SaaS
+          <Typography variant="h6" sx={{ flexGrow: 1, fontSize: 25 }}>
+            Smart Flashcard
           </Typography>
-          <Button color="inherit">
-            <Link href="/sign-up" passHref>
+          <Button color="inherit" sx={{ fontSize: 20 }}>
+            <Link
+              href="/sign-up"
+              passHref
+              sx={{ textDecoration: "none", color: "black" }}
+            >
               Sign Up
             </Link>
           </Button>
@@ -31,6 +35,7 @@ export default function SignupPage() {
         flexDirection={"column"}
         alignItems={"center"}
         justifyContent={"center"}
+        marginTop={20}
       >
         <Typography variant="h4">Sign In</Typography>
         <SignIn />

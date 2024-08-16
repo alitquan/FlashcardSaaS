@@ -3,3 +3,24 @@
   padding: 0;
   margin: 0;
 }
+html,
+body {
+  background-color: black;
+  height: 100vh;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #b22222, #feb47b);
+}
+.title {
+  background: linear-gradient(90deg, red, #feb47b); /* Gradient colors */
+  -webkit-background-clip: text; /* For WebKit browsers */
+  -webkit-text-fill-color: transparent; /* Hide the text color */
+  background-clip: text; /* For other browsers */
+  text-fill-color: transparent; /* For other browsers */
+  text-decoration: underline;
+  text-decoration-color: orangered;
+  text-decoration-thickness: 0.01em;
+  text-decoration-style: double;
+  border-bottom: #b22222;
+}
