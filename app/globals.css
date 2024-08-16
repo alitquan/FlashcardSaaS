@@ -5,7 +5,7 @@
 }
 html,
 body {
-  background-color: black;
+  background-color: white;
   height: 100vh;
 }
 
@@ -18,9 +18,5 @@ body {
   -webkit-text-fill-color: transparent; /* Hide the text color */
   background-clip: text; /* For other browsers */
   text-fill-color: transparent; /* For other browsers */
-  text-decoration: underline;
-  text-decoration-color: orangered;
-  text-decoration-thickness: 0.01em;
-  text-decoration-style: double;
-  border-bottom: #b22222;
+  background-color: red;
 }

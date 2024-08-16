@@ -86,6 +86,7 @@ export default function Home() {
           marginBottom={2}
           color={"darkred"}
           className="title"
+          fontSize={60}
         >
           Welcome To Smart Flashcard
         </Typography>
@@ -96,8 +97,9 @@ export default function Home() {
           variant="contained"
           sx={{
             mt: 2,
-            color: "white",
-            backgroundColor: "black",
+            color: "black",
+            p: 2,
+            backgroundColor: "white",
             border: "1px solid",
             "&:hover": {
               backgroundColor: "grey", // Change the hover background color
@@ -118,15 +120,15 @@ export default function Home() {
         >
           Features
         </Typography>
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <Box
               sx={{
                 my: 6,
-                p: 3,
+                p: 15,
                 border: "1px solid",
-                borderColor: "white",
-                borderRadius: 2,
+                borderColor: "black",
+                borderRadius: 4,
                 color: "darkred",
               }}
             >
@@ -139,8 +141,8 @@ export default function Home() {
                 Easy Text Input
               </Typography>
               <Typography>
-                Simply input your text and let our software do the rest of the
-                work!
+                Simply input your text or files and let our software do the rest
+                of the work!
               </Typography>
             </Box>
           </Grid>
@@ -148,10 +150,10 @@ export default function Home() {
             <Box
               sx={{
                 my: 6,
-                p: 3,
+                p: 15,
                 border: "1px solid",
-                borderColor: "white",
-                borderRadius: 2,
+                borderColor: "black",
+                borderRadius: 4,
                 color: "darkred",
               }}
             >
@@ -173,10 +175,10 @@ export default function Home() {
             <Box
               sx={{
                 my: 6,
-                p: 3,
+                p: 15,
                 border: "1px solid",
-                borderColor: "white",
-                borderRadius: 2,
+                borderColor: "black",
+                borderRadius: 4,
                 color: "darkred",
               }}
             >
@@ -200,7 +202,12 @@ export default function Home() {
       <Box sx={{ my: 6, textAlign: "center" }}>
         <Typography
           variant="h4"
-          sx={{ mb: 5, color: "darkred", textDecoration: "underline" }}
+          sx={{
+            mb: 5,
+            color: "darkred",
+            textDecoration: "underline",
+            fontWeight: "bold",
+          }}
           className="title"
         >
           Pricing
@@ -210,29 +217,33 @@ export default function Home() {
             <Box
               sx={{
                 my: 6,
-                p: 3,
+                p: 15,
                 border: "1px solid",
-                borderColor: "white",
+                borderColor: "black",
                 borderRadius: 2,
                 color: "darkred",
               }}
             >
-              <Typography variant="h5" className="title">
+              <Typography variant="h4" className="title" paddingBottom={3}>
                 Basic
               </Typography>
-              <Typography variant="h6">$5 / Month</Typography>
-              <Typography>
+              <Typography variant="h5" paddingBottom={3}>
+                $5 / Month
+              </Typography>
+              <Typography variant="h6" paddingBottom={3}>
                 Access to basic flashcard features and limited storage
               </Typography>
               <Button
                 sx={{
                   mt: 2,
-                  color: "white",
+                  color: "black",
                   border: "1px solid",
-                  backgroundColor: "black",
+                  backgroundColor: "white",
                   "&:hover": {
                     backgroundColor: "grey", // Change the hover background color
                     color: "darkgrey", // Optionally change the text color on hover
+                    textDecorationColor: "underline",
+                    textDecorationColor: "red",
                   },
                 }}
               >
@@ -244,29 +255,33 @@ export default function Home() {
             <Box
               sx={{
                 my: 6,
-                p: 3,
+                p: 15,
                 border: "1px solid",
-                borderColor: "white",
+                borderColor: "black",
                 borderRadius: 2,
                 color: "darkred",
               }}
             >
-              <Typography variant="h5" className="title">
+              <Typography variant="h4" className="title" paddingBottom={3}>
                 Pro
               </Typography>
-              <Typography variant="h6">$10 / Month</Typography>
-              <Typography>
+              <Typography variant="h5" paddingBottom={3}>
+                $10 / Month
+              </Typography>
+              <Typography paddingBottom={3} variant="h6">
                 Unlimited flashcards and storage with priority
               </Typography>
               <Button
                 sx={{
                   mt: 2,
-                  color: "white",
+                  color: "black",
                   border: "1px solid",
-                  backgroundColor: "back",
+                  backgroundColor: "white",
                   "&:hover": {
                     backgroundColor: "grey", // Change the hover background color
                     color: "darkgrey", // Optionally change the text color on hover
+                    textDecorationColor: "underline",
+                    textDecorationColor: "red",
                   },
                 }}
               >
