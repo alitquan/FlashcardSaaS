@@ -3,7 +3,7 @@
 import {useUser} from '@clerk/nextjs'
 import {use, useEffect, useState} from 'react' 
 
-import {CollectionReference, doc, collection, option, getDoc, setDoc} from 'firebase/firestore' 
+import {CollectionReference, doc, collection, option, getDoc, getDocs, setDoc} from 'firebase/firestore' 
 import {db} from '@/firebase' 
 import {useRouter} from 'next/navigation' 
 import {Card, CardActionArea, CardContent, Container, Box, Typography, Grid} from '@mui/material' 
@@ -17,6 +17,41 @@ export default function Flashcards() {
 	const [collectionList, setCollections] = useState([]);
   	const [flipped, setFlipped] = useState({});
 
+	const handleCollectionClick = async (collectionName) => {
+
+	  // // Reference to the user's document
+      // const userDocRef = doc(db, 'users', user.id);
+      
+      // // Reference to the subcollection within the user's document
+      // const subcollectionRef = collection(userDocRef, collectionName);
+
+	  // console.log(subcollectionRef);
+
+// Reference to the user's document
+      const userDocRef = doc(db, 'users', user.id);
+      
+      // Reference to the subcollection (flashcards) within the specific collection
+      const flashcardsRef = collection(userDocRef, collectionName);
+
+      // Fetch documents from the flashcards subcollection
+      const querySnapshot = await getDocs(flashcardsRef);
+      
+      let fetchedFlashcards = [];
+      querySnapshot.forEach(doc => {
+        fetchedFlashcards.push(doc.data()); // Assuming each document contains flashcard data
+      });
+
+	  console.log (fetchedFlashcards);
+
+      // Fetch documents from the subcollection
+      // const querySnapshot = await getDoc(subcollectionRef);
+		
+	  // console.log("Query snapshot: ", querySnapshot);
+
+		// querySnapshot.forEach(doc => {
+		//   flashcards.push(doc.data()); // Assuming each document contains flashcard data
+		// });
+	}; 
 
 	const handleCardClick = (id) => {
 		setFlipped((prev) => ({
@@ -27,7 +62,7 @@ export default function Flashcards() {
 
 	useEffect( () => {
 
-		async function getFlashCards() {
+		async function getCollections() {
 			if (!user) {
 				console.log("no user");
 			}
@@ -58,8 +93,14 @@ export default function Flashcards() {
 			}
 		}
 			console.log("Ran");
-			getFlashCards(); 
-		}, [user, isSignedIn])
+			getCollections();
+			if (! flashcards) {
+				console.log("flashcards ") 
+			}
+			else {
+				console.log("no flashcards yet") 
+			}
+		}, [user , isSignedIn])
 
 
 
@@ -85,7 +126,7 @@ export default function Flashcards() {
 					<Box
 						key={index}
 						sx={{
-							width: '40%',
+							width: '30%',
 							'&:hover': {
 								backgroundColor: 'lightblue', // Change this to your desired hover color
 							},
@@ -94,6 +135,7 @@ export default function Flashcards() {
 							justifyContent: 'center',
 							cursor: 'pointer'
 						}}
+						onClick={() => handleCollectionClick(collection.name)}
 					>
 						<Typography variant="h2">
 								{collection.name} 
