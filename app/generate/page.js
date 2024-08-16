@@ -150,33 +150,33 @@ const handleSubmit = async () => {
 				sx={{
 					perspective: '1000px', // Provide depth for 3D effect
 					width: '100%',
-						height: '200px',
+					height: '200px',
 				}}
 				>
 				<Box
 				sx={{
 					position: 'relative',
-						width: '100%',
-						height: '100%',
-						transformStyle: 'preserve-3d',
-						transition: 'transform 0.5s',
-						transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+					width: '100%',
+					height: '100%',
+					transformStyle: 'preserve-3d',
+					transition: 'transform 0.5s',
+					transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
 				}}
 				>
 				{/* Front face */}
 				<Box
 				sx={{
 					position: 'absolute',
-						width: '100%',
-						height: '100%',
-						backfaceVisibility: 'hidden', // Hide backface when flipped
+					width: '100%',
+					height: '100%',
+					backfaceVisibility: 'hidden', // Hide backface when flipped
 					display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						padding: 2,
-						boxSizing: 'border-box',
-						backgroundColor: 'white',
-						boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', // Optional: for better visual
+					justifyContent: 'center',
+					alignItems: 'center',
+					padding: 2,
+					boxSizing: 'border-box',
+					backgroundColor: 'white',
+					boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', // Optional: for better visual
 				}}
 				>
 				<Typography variant="h5">{flashcard.front}</Typography>
@@ -188,7 +188,7 @@ const handleSubmit = async () => {
 						width: '100%',
 						height: '100%',
 						backfaceVisibility: 'hidden', // Hide backface when flipped
-					display: 'flex',
+						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
 						padding: 2,

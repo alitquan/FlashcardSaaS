@@ -8,6 +8,7 @@ import {db} from '@/firebase'
 import {useRouter} from 'next/navigation' 
 import {Card, CardActionArea, CardContent, Container, Box, Typography, Grid} from '@mui/material' 
 import Flashcardbar from '../components/flashCardBar' 
+import Flipcard from '../components/flipcard' 
 
 export default function Flashcards() {
 
@@ -48,7 +49,6 @@ export default function Flashcards() {
 		console.log("fetchedFlashcards: ", fetchedFlashcards);
 		setFlashcards(fetchedFlashcards);
 		setCollectionChosen(true);
-		console.log("Flashcards: ", flashcards);
 
 	}; 
 
@@ -106,13 +106,14 @@ export default function Flashcards() {
 	return(
 
 
-		<Container maxWidth="100vw"
+		<Container maxWidth="100vw" 
 			sx={{ 
 				display: "flex", 
 				justifyContent: "center",
 				flexDirection: "column",
 				alignItems: "center",
 				marginTop: "2vw", 
+			    height: 'auto'
 			}}>
 		<Flashcardbar/> 
 
@@ -128,23 +129,27 @@ export default function Flashcards() {
 					Cards: 
 				</Typography>
 
-				{flashcards.map((collection, index) => {
 
-					{layout === 'vertical' && (
-						console.log("vertical")
+				{layout === 'vertical' && (
+					<> 
+					
+					{flashcards.map((card, index) => (
+						<Flipcard key={index} front={card.front} back={card.back} /> 
+					)
 					)}
+					</>
+				)}
 
 
-					{layout === 'horizontal' && (
-						console.log("horizontal")
-					)}
+				{layout === 'horizontal' && (
+					console.log("horizontal")
+				)}
 
 
-					{layout === 'grid' && (
-						console.log("grid")
-					)}
+				{layout === 'grid' && (
+					console.log("grid")
+				)}
 
-				})};
 			</> 
 		) : 
 
