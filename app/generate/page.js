@@ -5,6 +5,7 @@ import { collection, doc, getDoc, writeBatch } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Dialog, DialogTitle, DialogActions, DialogContent, DialogContentText, Card, CardActionArea, CardContent, Grid, Box, Button, TextField, Typography, Paper, Container } from "@mui/material";
+import {useUser} from '@clerk/nextjs'
 
 export default function Generate() {
   const [isLoaded, setLoaded] = useState(false);
@@ -14,7 +15,7 @@ export default function Generate() {
   const [name, setName] = useState("");
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
+  const {isSignedIn, user} = useUser();
 
 
 const handleSubmit = async () => {
@@ -62,7 +63,15 @@ const handleSubmit = async () => {
 
     try {
       const batch = writeBatch(db);
-      const userDocRef = doc(collection(db, "user"), "userId"); // Replace "userId" with actual user ID
+	  var userDocRef; 
+	  
+	  if (! user) { 
+      	userDocRef = doc(collection(db, "users"), "userId"); // Replace "userId" with actual user ID
+	  }
+	  else { 
+		userDocRef = doc(collection(db,"users"), user.id);
+	  }
+
       const docSnap = await getDoc(userDocRef);
 
       if (docSnap.exists()) {
@@ -141,33 +150,33 @@ const handleSubmit = async () => {
 				sx={{
 					perspective: '1000px', // Provide depth for 3D effect
 					width: '100%',
-						height: '200px',
+					height: '200px',
 				}}
 				>
 				<Box
 				sx={{
 					position: 'relative',
-						width: '100%',
-						height: '100%',
-						transformStyle: 'preserve-3d',
-						transition: 'transform 0.5s',
-						transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
+					width: '100%',
+					height: '100%',
+					transformStyle: 'preserve-3d',
+					transition: 'transform 0.5s',
+					transform: flipped[index] ? 'rotateY(180deg)' : 'rotateY(0deg)',
 				}}
 				>
 				{/* Front face */}
 				<Box
 				sx={{
 					position: 'absolute',
-						width: '100%',
-						height: '100%',
-						backfaceVisibility: 'hidden', // Hide backface when flipped
+					width: '100%',
+					height: '100%',
+					backfaceVisibility: 'hidden', // Hide backface when flipped
 					display: 'flex',
-						justifyContent: 'center',
-						alignItems: 'center',
-						padding: 2,
-						boxSizing: 'border-box',
-						backgroundColor: 'white',
-						boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', // Optional: for better visual
+					justifyContent: 'center',
+					alignItems: 'center',
+					padding: 2,
+					boxSizing: 'border-box',
+					backgroundColor: 'white',
+					boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)', // Optional: for better visual
 				}}
 				>
 				<Typography variant="h5">{flashcard.front}</Typography>
@@ -179,7 +188,7 @@ const handleSubmit = async () => {
 						width: '100%',
 						height: '100%',
 						backfaceVisibility: 'hidden', // Hide backface when flipped
-					display: 'flex',
+						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
 						padding: 2,
