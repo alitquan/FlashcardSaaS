@@ -1,5 +1,4 @@
-import { SignIn, SignUp } from "@clerk/nextjs";
-
+import { SignIn, SignUp, useClerk, useUser } from "@clerk/nextjs";
 const {
   Container,
   AppBar,

@@ -19,6 +19,9 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 
+import Dashboard from './components/dashboard' 
+import Selection from './components/selection' 
+
 export default function Home() {
   return (
     <Container maxWidth="lg" className="animated-gradient">
@@ -46,26 +49,7 @@ export default function Home() {
                 color={"black"}
                 sx={{
                   flexGrow: 1,
-                  mt: 2,
-                  padding: 1,
-                  color: "white",
-                  border: "1px solid",
-                  marginRight: "5px",
-                }}
-              >
-                Login
-              </Typography>
-            </Button>
-            <Button color="inherit" href="sign-up">
-              <Typography
-                fontSize={20}
-                color={"black"}
-                sx={{
-                  flexGrow: 1,
-                  mt: 2,
-                  padding: 1,
-                  color: "white",
-                  // backgroundColor: "black",
+                  mt: 2,or: "black",
                   border: "1px solid",
                 }}
               >
@@ -282,6 +266,25 @@ export default function Home() {
                     color: "darkgrey", // Optionally change the text color on hover
                     textDecorationColor: "underline",
                     textDecorationColor: "red",
+                  padding: 1,
+                  color: "white",
+                  border: "1px solid",
+                  marginRight: "5px",
+                }}
+              >
+                Login
+              </Typography>
+            </Button>
+            <Button color="inherit" href="sign-up">
+              <Typography
+                fontSize={20}
+                color={"black"}
+                sx={{
+                  flexGrow: 1,
+                  mt: 2,
+                  padding: 1,
+                  color: "white",
+                  // backgroundCol
                   },
                 }}
               >
