@@ -255,7 +255,7 @@ export default function Home() {
               <Typography paddingBottom={3} variant="h6">
                 Unlimited flashcards and storage with priority
               </Typography>
-              <Button
+ 			  <Button
                 sx={{
                   mt: 2,
                   color: "black",
@@ -266,34 +266,16 @@ export default function Home() {
                     color: "darkgrey", // Optionally change the text color on hover
                     textDecorationColor: "underline",
                     textDecorationColor: "red",
-                  padding: 1,
-                  color: "white",
-                  border: "1px solid",
-                  marginRight: "5px",
-                }}
-              >
-                Login
-              </Typography>
-            </Button>
-            <Button color="inherit" href="sign-up">
-              <Typography
-                fontSize={20}
-                color={"black"}
-                sx={{
-                  flexGrow: 1,
-                  mt: 2,
-                  padding: 1,
-                  color: "white",
-                  // backgroundCol
                   },
                 }}
               >
-                Choose Pro
+                Choose Pro 
               </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-    </Container>
-  );
+
+	  		</Box>
+          </Grid> 
+		</Grid>
+	</Box>
+	  </Container>
+);
 }
