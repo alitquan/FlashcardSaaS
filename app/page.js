@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from 'next/link';
 import getStripe from "./utils/get-stripe";
 import css from "/app/globals.css";
 import {
@@ -18,50 +19,18 @@ import {
   Typography,
 } from "@mui/material";
 import Head from "next/head";
-
 import Dashboard from './components/dashboard' 
 import Selection from './components/selection' 
-
+import Navbar from './components/navbar'
 export default function Home() {
   return (
     <Container maxWidth="lg" className="animated-gradient">
       <Head>
-        <title>Smart Flashcard</title>
+        <title>SmartFlash </title>
         <meta name="description" content="Create flashcards from your text" />
       </Head>
-
-      <AppBar>
-        <Toolbar className="navbar">
-          <Typography
-            variant="h6"
-            style={{
-              flexGrow: 1,
-              color: "white",
-              fontSize: 30,
-            }}
-          >
-            Smart Flashcard
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="sign-in">
-              <Typography
-                fontSize={20}
-                color={"black"}
-                sx={{
-                  flexGrow: 1,
-                  mt: 2,or: "black",
-                  border: "1px solid",
-                }}
-              >
-                Sign Up
-              </Typography>
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+	 
+	  <Navbar />
 
       <Box textAlign="center" my={4}>
         <Typography
@@ -231,7 +200,17 @@ export default function Home() {
                   },
                 }}
               >
-                Choose Basic
+
+				<Link
+				  href={{ 
+					   pathname: '/subscription', 
+			           query: { plan: "basic"}
+				  }}
+				  passHref
+				>
+					Choose Basic
+				</Link>
+
               </Button>
             </Box>
           </Grid>
@@ -269,7 +248,16 @@ export default function Home() {
                   },
                 }}
               >
-                Choose Pro 
+				<Link
+				  href={{ 
+					   pathname: '/subscription', 
+			           query: { plan: "premium"}
+				  }}
+				  passHref
+				>
+					Choose Premium 
+				</Link>
+
               </Button>
 
 	  		</Box>

@@ -1,0 +1,21 @@
+
+
+.containerForm{ 
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 3rem;
+	border: 2px solid black;
+	width: fit-content; 
+	padding: 5px;
+}
+
+
+.statements {
+	text-align: right;
+	margin: 1em 2em;
+}
+
+.details {
+	text-align: left;
+	max-width: 5rem;
+}
