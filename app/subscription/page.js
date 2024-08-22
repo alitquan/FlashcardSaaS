@@ -7,7 +7,8 @@ import Navbar from '../components/navbar.js';
 import styles from '../components/Subscription.module.css';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('your-publishable-key');  // Replace with your actual Stripe public key
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+
 
 function SubscribeButton({ plan }) {
     const { user } = useUser();
